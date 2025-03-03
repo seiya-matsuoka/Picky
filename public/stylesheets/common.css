@@ -1,0 +1,86 @@
+body {
+    background-color: #E3F2FD;
+}
+
+/* 改行 */
+.text-pre-wrap {
+    white-space: pre-wrap;
+}
+
+.accordion-body {
+    word-break: break-word; /* 長い単語を折り返す */
+    overflow-wrap: break-word; /* レスポンシブで折り返し対応 */
+}
+
+/* 画像表示 */
+.object-fit-contain {
+    object-fit: contain;
+}
+/* 
+.index-img {
+    background-color: rgba(9, 48, 75, 0.5);
+    height: 348px;
+}
+
+.player-profile-img {
+    background-color: rgba(9, 48, 75, 0.5);
+    height: 556px;
+}
+
+.sponsor-profile-img {
+    background-color: rgba(9, 48, 75, 0.5);
+    height: 556px;
+} */
+
+.player-profile-img {
+    background-color: rgba(9, 48, 75, 0.5);
+    height: 380px;
+}
+
+.sponsor-profile-img {
+    background-color: rgba(9, 48, 75, 0.5);
+    height: 380px;
+}
+
+@media (min-width: 768px) {
+
+    .index-img {
+        background-color: rgba(9, 48, 75, 0.5);
+        height: 348px;
+    }
+    
+    .player-profile-img {
+        background-color: rgba(9, 48, 75, 0.5);
+        height: 556px;
+    }
+    
+    .sponsor-profile-img {
+        background-color: rgba(9, 48, 75, 0.5);
+        height: 556px;
+    }
+}
+
+/* SNSアイコン */
+.icon-link {
+    text-decoration: none;
+    font-size: 40px;
+    width: 60px;
+    transition: color 0.2s, background-color 0.2s;
+    border-radius: 12px;
+}
+
+#icon-x {
+    color: #000000;
+}
+
+#icon-instagram {
+    color: #DD2A7B;
+}
+
+#icon-youtube {
+    color: #FF0000;
+}
+
+.icon-link:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,368 @@
+<% layout('layouts/boilerplate') %>
+    <div class="row">
+        <h1 class="text-center">プロフィール編集</h1>
+        <div class="offset-md-3 col-md-6">
+            <form action="/players/<%= player._id %>?_method=PUT" method="POST" novalidate class="validated-form row"
+                enctype="multipart/form-data">
+                <div class="mb-3 col-md-6">
+                    <label class="form-label" for="lastname">姓</label>
+                    <input class="form-control" type="text" name="player[lastname]" id="lastname" value="<%= player.lastname %>" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label class="form-label" for="firstname">名</label>
+                    <input class="form-control" type="text" name="player[firstname]" id="firstname" value="<%= player.firstname %>" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>                
+                <div class="mb-3 col-12">
+                    <label class="form-label">生年月日</label>
+                    <div class="row">
+                        <div class="mb-3 col-md-4">
+                            <div class="input-group">
+                                <select class="form-select" name="player[birthyear]" id="birthyear" required>
+                                    <% for (let i=1980; i <=2020; i++) { %>
+                                        <option value="<%= i %>" <%= i === player.birthyear ? 'selected' : '' %>>
+                                            <%= i %>
+                                        </option>
+                                    <% } %>
+                                </select>
+                                <label class="input-group-text rounded-end" for="birthyear">年</label>
+                                <div class="valid-feedback">
+                                    OK!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-3">
+                            <div class="input-group">
+                                <select class="form-select" name="player[birthmonth]" id="birthmonth" required>
+                                    <% for (let i=1; i <=12; i++) { %>
+                                        <option value="<%= i %>" <%= i === player.birthmonth ? 'selected' : '' %>>
+                                            <%= i %>
+                                        </option>
+                                    <% } %>
+                                </select>
+                                <label class="input-group-text rounded-end" for="birthmonth">月</label>
+                                <div class="valid-feedback">
+                                    OK!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-3">
+                            <div class="input-group">
+                                <select class="form-select" name="player[birthday]" id="birthday" required>
+                                    <% for (let i=1; i <=31; i++) { %>
+                                        <option value="<%= i %>" <%= i === player.birthday ? 'selected' : '' %>>
+                                            <%= i %>
+                                        </option>
+                                    <% } %>
+                                </select>
+                                <label class="input-group-text rounded-end" for="birthday">日</label>
+                                <div class="valid-feedback">
+                                    OK!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label class="form-label" for="nationality">国籍</label>
+                    <input class="form-control" type="text" name="player[nationality]" id="nationality" value="<%= player.nationality %>" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3 col-md-8">
+                    <label class="form-label" for="birthplace">出身地</label>
+                    <input class="form-control" type="text" name="player[birthplace]" id="birthplace" value="<%= player.birthplace %>" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3 col-12">
+                    <label class="form-label" for="workarea">活動エリア</label>
+                    <input class="form-control" type="text" name="player[workarea]" id="workarea" value="<%= player.workarea %>" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3 col-md-3">
+                    <label class="form-label" for="height">身長(cm)</label>
+                    <input class="form-control" type="number" name="player[height]" id="height" value="<%= player.height %>" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3 col-md-3">
+                    <label class="form-label" for="weight">体重(kg)</label>
+                    <input class="form-control" type="number" name="player[weight]" id="weight" value="<%= player.weight %>" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3 col-md-3">
+                    <label class="form-label" for="bloodtype">血液型</label>
+                    <select class="form-select" name="player[bloodtype]" id="bloodtype" required>
+                        <option value="" disabled selected>未選択</option>                                       
+                        <option value="A" <%= "A" === player.bloodtype ? 'selected' : '' %>>A</option>
+                        <option value="B" <%= "B" === player.bloodtype ? 'selected' : '' %>>B</option>
+                        <option value="O" <%= "O" === player.bloodtype ? 'selected' : '' %>>O</option>
+                        <option value="AB" <%= "AB" === player.bloodtype ? 'selected' : '' %>>AB</option>
+                    </select>                    
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="affiliationteam">所属チーム</label>
+                    <input class="form-control" type="text" name="player[affiliationteam]" id="affiliationteam" value="<%= player.affiliationteam %>"
+                        required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3 col-md-7">
+                    <label class="form-label" for="position">ポジション</label>
+                    <input class="form-control" type="text" name="player[position]" id="position" value="<%= player.position %>" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3 col-md-3">
+                    <label class="form-label" for="dominantfoot">利き足</label>
+                    <input class="form-control" type="text" name="player[dominantfoot]" id="dominantfoot" value="<%= player.dominantfoot %>" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div id="career-container">
+                    <div id="career-entry">
+                        <div class="">
+                            <label class="form-label">所属チーム歴</label>
+                            <div class="input-group">
+                                <label class="input-group-text" for="career0">1</label>
+                                <input class="form-control rounded-end" type="text" name="player[career][0]" id="career0" value="<%= player.career[0] %>" required>
+                                <div class="valid-feedback">
+                                    OK!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% player.career.forEach((career, i)=> { %>
+                        <% if (i !==0) { %>
+                            <div class="career-entry<%= i %> addedcareer">
+                                <div class="text-center">↑</div>
+                                <div class="input-group">
+                                    <label class="input-group-text" for="career<%= i %>">
+                                        <%= i + 1 %>
+                                    </label>
+                                    <input class="form-control rounded-end" type="text" name="player[career][<%= i %>]" id="career<%= i %>"
+                                        value="<%= career %>" required>
+                                    <div class="valid-feedback">
+                                        OK!
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% }) %>
+                </div>
+                <div class="my-3 d-grid gap-2 d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary" id="add-career-btn">追加</button>
+                    <button type="button" class="btn btn-danger" id="remove-career-btn">削除</button>
+                </div>
+                <div id="record-container">
+                    <div id="record-entry">
+                        <div class="">
+                            <label class="form-label">成績・実績</label>
+                            <div class="input-group">
+                                <label class="input-group-text" for="record0">1</label>
+                                <input class="form-control rounded-end" type="text" name="player[record][0]" id="record0" value="<%= player.record[0] %>" required>
+                                <div class="valid-feedback">
+                                    OK!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% player.record.forEach((record, i)=> { %>
+                        <% if (i !==0) { %>
+                            <div class="record-entry<%= i %> addedrecord">
+                                <div class="input-group mt-3">
+                                    <label class="input-group-text" for="record<%= i %>">
+                                        <%= i + 1 %>
+                                    </label>
+                                    <input class="form-control rounded-end" type="text" name="player[record][<%= i %>]" id="record<%= i %>"
+                                        value="<%= record %>" required>
+                                    <div class="valid-feedback">
+                                        OK!
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% }) %>
+                </div>
+                <div class="my-3 d-grid gap-2 d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary" id="add-record-btn">追加</button>
+                    <button type="button" class="btn btn-danger" id="remove-record-btn">削除</button>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="returndetail">提供できるリターン</label>
+                    <textarea class="form-control" type="text" name="player[returndetail]" id="returndetail"
+                        required rows="4"><%= player.returndetail %></textarea>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="desiredsupport">希望するスポンサー支援</label>
+                    <textarea class="form-control" type="text" name="player[desiredsupport]" id="desiredsupport"
+                        required rows="4"><%= player.desiredsupport %></textarea>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div id="contractsponsor-container">
+                    <div id="contractsponsor-entry">
+                        <div class="">
+                            <label class="form-label">契約中のスポンサー</label>
+                            <div class="input-group">
+                                <label class="input-group-text" for="contractsponsor">1</label>
+                                <input class="form-control rounded-end" type="text" name="player[contractsponsor][0]"
+                                    id="contractsponsor" value="<%= player.contractsponsor[0] %>" required>
+                                <div class="valid-feedback">
+                                    OK!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% player.contractsponsor.forEach((contractsponsor, i)=> { %>
+                        <% if (i !==0) { %>
+                            <div class="contractsponsor-entry<%= i %> addedcontractsponsor">
+                                <div class="input-group mt-3">
+                                    <label class="input-group-text" for="contractsponsor<%= i %>">
+                                        <%= i + 1 %>
+                                    </label>
+                                    <input class="form-control rounded-end" type="text" name="player[contractsponsor][<%= i %>]" id="contractsponsor<%= i %>"
+                                        value="<%= contractsponsor %>" required>
+                                    <div class="valid-feedback">
+                                        OK!
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% }) %>
+                </div>
+                <div class="my-3 d-grid gap-2 d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary" id="add-contractsponsor-btn">追加</button>
+                    <button type="button" class="btn btn-danger" id="remove-contractsponsor-btn">削除</button>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="playerwork">選手活動の目標</label>
+                    <textarea class="form-control" type="text" name="player[target][playerwork]" id="playerwork"
+                        required rows="3"><%= player.target.playerwork %></textarea>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="socialwork">社会活動の目標</label>
+                    <textarea class="form-control" type="text" name="player[target][socialwork]" id="socialwork"
+                        required rows="3"><%= player.target.socialwork %></textarea>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="otherwork">その他の目標</label>
+                    <textarea class="form-control" type="text" name="player[target][otherwork]" id="otherwork"
+                        required rows="2"><%= player.target.otherwork %></textarea>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="message">メッセージ</label>
+                    <textarea class="form-control" type="text" name="player[message]" id="message" required rows="5"><%= player.message %></textarea>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3 col-12">
+                    <label class="form-label" for="email">メールアドレス</label>
+                    <input class="form-control" type="email" name="email" id="email" value="<%= currentUser.email %>" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-4 col-12">
+                    <label class="form-label">SNSリンク</label>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="x">X</label>
+                        <input class="form-control rounded-end" type="text" name="player[snslink][x]" id="x" value="<%= player.snslink.x %>">
+                        <div class="valid-feedback">
+                            OK!
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="instagram">Instagram</label>
+                        <input class="form-control rounded-end" type="text" name="player[snslink][instagram]" id="instagram" value="<%= player.snslink.instagram %>">
+                        <div class="valid-feedback">
+                            OK!
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group-text" for="youtube">Youtube</label>
+                        <input class="form-control rounded-end" type="text" name="player[snslink][youtube]" id="youtube" value="<%= player.snslink.youtube %>">
+                        <div class="valid-feedback">
+                            OK!
+                        </div>
+                    </div>
+                </div>  
+                <div class="mb-4">
+                    <label for="image" class="form-label">画像のアップロード</label>
+                    <input class="form-control" type="file" id="image" name="image" multiple>
+                </div>
+                <div class="mb-4">
+                    <% player.images.forEach(function(img, i) { %>
+                        <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="">
+                        <div class="form-check-inline">
+                            <input type="checkbox" name="deleteImages[]" id="image-<%= i %>" value="<%= img.filename %>">
+                        </div>
+                        <label for="image-<%= i %>">削除する</label>
+                    <% }) %>
+                </div>
+                <div class="mb-3 d-grid gap-2 d-flex justify-content-center">
+                    <button class="btn btn-info">更新する</button>
+                </div>
+            </form>
+
+            <div class="mb-3 mt-5 d-grid gap-2 d-flex justify-content-end">
+                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">ユーザーを削除する</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- モーダル -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>ユーザーを<strong>削除</strong>します。<br>本当によろしいですか？</p>
+                    <form action="/<%= currentUser._id %>?_method=DELETE" method="POST" novalidate class="validated-form"
+                        enctype="multipart/form-data">
+                        <div class="modal-footer justify-content-center border-top-0">
+                            <button type="submit" class="btn btn-primary">OK</button>
+                            <button type="button" class="btn btn-secondary ms-3" data-bs-dismiss="modal">NO</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/javascripts/playerEdit.js"></script>

@@ -1,0 +1,36 @@
+<% layout('layouts/boilerplate') %>
+<h1>プレイヤーリスト</h1>
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    <% for(let player of players) { %>
+    <div class="col mb-3">
+        <div class="card h-100">
+            <div class="row g-0">
+                <div class=" col-md-6">
+                    <div class="index-img">
+                    <% if(player.images && player.images.length) {%>
+                        <img class="img-fluid w-100 h-100 object-fit-contain" src="<%= player.images[0].url %>" alt="">
+                    <% } %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body pb-1">
+                        <h2 class="card-title"><%= player.lastname %> <%= player.firstname %></h2>
+                    </div>
+                    <ul class="list-group list-group-flush border-top border-bottom">
+                        <li class="list-group-item">生年月日：<%= player.birthyear %>/<%= player.birthmonth %>/<%=player.birthday %></li>
+                        <li class="list-group-item">活動エリア：<%= player.workarea %></li>
+                        <li class="list-group-item">所属チーム：<%= player.affiliationteam %></li>
+                    </ul>
+                    <div class="card-body">
+                        <p class="card-text"><%= player.message.length> 50 ? player.message.substring(0, 100) + "..." : player.message %></p>
+                    </div>
+                    <div class="card-body text-center  pt-0">
+                        <a class="btn btn-primary" href="/players/<%= player._id %>"><%= player.lastname %> <%= player.firstname %>の詳細</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
+</div>

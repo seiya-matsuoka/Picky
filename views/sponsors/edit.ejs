@@ -1,0 +1,215 @@
+<% layout('layouts/boilerplate') %>
+    <div class="row">
+        <h1 class="text-center">プロフィール編集</h1>
+        <div class="offset-md-3 col-md-6">
+            <form action="/sponsors/<%= sponsor._id %>?_method=PUT" method="POST" novalidate class="validated-form row"
+                enctype="multipart/form-data">
+                <div class="mb-3 col-md-12">
+                    <label class="form-label" for="companyname">会社名</label>
+                    <input class="form-control" type="text" name="sponsor[companyname]" id="companyname" value="<%= sponsor.companyname %>" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>              
+                <div class="mb-3 col-md-12">
+                    <label class="form-label" for="address">住所</label>
+                    <input class="form-control" type="text" name="sponsor[address]" id="address" value="<%= sponsor.address %>" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>                  
+                <div class="mb-3 col-md-4">
+                    <label class="form-label" for="foundationyear">設立年</label>
+                    <div class="input-group">
+                        <input class="form-control" type="number" name="sponsor[foundationyear]" id="foundationyear" value="<%= sponsor.foundationyear %>" required>
+                        <label class="input-group-text rounded-end">年</label>
+                        <div class="valid-feedback">
+                            OK!
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-12">
+                    <label class="form-label" for="businessdetail">事業内容</label>
+                    <input class="form-control" type="text" name="sponsor[businessdetail]" id="businessdetail" value="<%= sponsor.businessdetail %>" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label class="form-label" for="capital">資本金</label>
+                    <div class="input-group">
+                        <input class="form-control" type="text" name="sponsor[capital]" id="capital" value="<%= sponsor.capital %>" required>
+                        <label class="input-group-text rounded-end">円</label>
+                        <div class="valid-feedback">
+                            OK!
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label class="form-label" for="employeenumber">従業員数</label>
+                    <div class="input-group">
+                        <input class="form-control" type="text" name="sponsor[employeenumber]" id="employeenumber" value="<%= sponsor.employeenumber %>" required>
+                        <label class="input-group-text rounded-end">人</label>
+                        <div class="valid-feedback">
+                            OK!
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-12">
+                    <label class="form-label" for="homepage">ホームページ</label>
+                    <input class="form-control" type="text" name="sponsor[homepage]" id="homepage" value="<%= sponsor.homepage %>" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>               
+                <div class="mb-3">
+                    <label class="form-label" for="companydescription">会社説明</label>
+                    <textarea class="form-control" type="text" name="sponsor[companydescription]" id="companydescription"
+                        required rows="4"><%= sponsor.companydescription %></textarea>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="calculatestatue">求める選手・人物像</label>
+                    <textarea class="form-control" type="text" name="sponsor[calculatestatue]" id="calculatestatue"
+                        required rows="4"><%= sponsor.calculatestatue %></textarea>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="supportdetail">提供できるスポンサー支援</label>
+                    <textarea class="form-control" type="text" name="sponsor[supportdetail]" id="supportdetail"
+                        required rows="4"><%= sponsor.supportdetail %></textarea>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="desiredreturn">希望するリターン</label>
+                    <textarea class="form-control" type="text" name="sponsor[desiredreturn]" id="desiredreturn"
+                        required rows="4"><%= sponsor.desiredreturn %></textarea>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div id="contractplayer-container">
+                    <div id="contractplayer-entry">
+                        <div class="">
+                            <label class="form-label">契約中の選手</label>
+                            <div class="input-group">
+                                <label class="input-group-text" for="contractplayer">1</label>
+                                <input class="form-control rounded-end" type="text" name="sponsor[contractplayer][0]"
+                                    id="contractplayer" value="<%= sponsor.contractplayer[0] %>" required>
+                                <div class="valid-feedback">
+                                    OK!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% sponsor.contractplayer.forEach((contractplayer, i)=> { %>
+                        <% if (i !==0) { %>
+                            <div class="contractplayer-entry<%= i %> addedcontractplayer">
+                                <div class="input-group mt-3">
+                                    <label class="input-group-text" for="contractplayer<%= i %>">
+                                        <%= i + 1 %>
+                                    </label>
+                                    <input class="form-control rounded-end" type="text" name="sponsor[contractplayer][<%= i %>]" id="contractplayer<%= i %>"
+                                        value="<%= contractplayer %>" required>
+                                    <div class="valid-feedback">
+                                        OK!
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% }) %>
+                </div>
+                <div class="my-3 d-grid gap-2 d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary" id="add-contractplayer-btn">追加</button>
+                    <button type="button" class="btn btn-danger" id="remove-contractplayer-btn">削除</button>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="message">メッセージ</label>
+                    <textarea class="form-control" type="text" name="sponsor[message]" id="message" required rows="5"><%= sponsor.message %></textarea>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-3 col-12">
+                    <label class="form-label" for="email">メールアドレス</label>
+                    <input class="form-control" type="email" name="email" id="email" value="<%= currentUser.email %>" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div class="mb-4 col-12">
+                    <label class="form-label">SNSリンク</label>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="x">X</label>
+                        <input class="form-control rounded-end" type="text" name="sponsor[snslink][x]" id="x" value="<%= sponsor.snslink.x %>">
+                        <div class="valid-feedback">
+                            OK!
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="instagram">Instagram</label>
+                        <input class="form-control rounded-end" type="text" name="sponsor[snslink][instagram]" id="instagram" value="<%= sponsor.snslink.instagram %>">
+                        <div class="valid-feedback">
+                            OK!
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group-text" for="youtube">Youtube</label>
+                        <input class="form-control rounded-end" type="text" name="sponsor[snslink][youtube]" id="youtube" value="<%= sponsor.snslink.youtube %>">
+                        <div class="valid-feedback">
+                            OK!
+                        </div>
+                    </div>
+                </div>     
+                <div class="mb-4">
+                    <label for="image" class="form-label">画像のアップロード</label>
+                    <input class="form-control" type="file" id="image" name="image" multiple>
+                </div>
+                <div class="mb-4">
+                    <% sponsor.images.forEach(function(img, i) { %>
+                        <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="">
+                        <div class="form-check-inline">
+                            <input type="checkbox" name="deleteImages[]" id="image-<%= i %>" value="<%= img.filename %>">
+                        </div>
+                        <label for="image-<%= i %>">削除する</label>
+                    <% }) %>
+                </div>
+                <div class="mb-3 d-grid gap-2 d-flex justify-content-center">
+                    <button class="btn btn-info">更新する</button>
+                </div>
+            </form>
+
+            <div class="mb-3 mt-5 d-grid gap-2 d-flex justify-content-end">
+                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">ユーザーを削除する</button>
+            </div>           
+        </div>
+    </div>
+
+    <!-- モーダル -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>ユーザーを<strong>削除</strong>します。<br>本当によろしいですか？</p>
+                    <form action="/<%= currentUser._id %>?_method=DELETE" method="POST" novalidate class="validated-form"
+                        enctype="multipart/form-data">
+                        <div class="modal-footer justify-content-center border-top-0">
+                            <button type="submit" class="btn btn-primary">OK</button>
+                            <button type="button" class="btn btn-secondary ms-3" data-bs-dismiss="modal">NO</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/javascripts/sponsorEdit.js"></script>

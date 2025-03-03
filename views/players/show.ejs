@@ -1,0 +1,295 @@
+<% layout('layouts/boilerplate') %>
+
+    <!-- 上部エリア -->
+    <div class="row  mb-5 profile">
+        <div class="col-md-10 offset-md-1">
+            <div class="card h-100">
+            <div class="row g-0 h-100">
+                <!-- 写真 -->
+                <div class="col-md-6">
+                    <div id="carouselExampleIndicators" class="carousel slide h-100" data-bs-ride="false"  data-bs-interval="false">
+                        <div class="carousel-indicators">
+                            <% if(player.images.length> 1) { %>
+                                <% player.images.forEach((img, i)=> { %>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= i %>"
+                                        class="<%= i === 0 ? 'active': '' %>" aria-current="true" aria-label="Slide <%= i + 1 %>"></button>
+                                <% }) %>
+                            <% } %>
+                        </div>
+                        <div class="carousel-inner player-profile-img">
+                            <% player.images.forEach((img, i)=> { %>
+                                <div class="carousel-item <%= i === 0 ? 'active': '' %> h-100">
+                                    <img src="<%= img.url %>" class="d-block w-100 h-100 object-fit-contain" alt="">
+                                </div>
+                            <% }) %>
+                        </div>
+                        <% if(player.images.length> 1) { %>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        <% } %>
+                    </div>                
+                </div>
+                <!-- プロフィール -->
+                <div class="col-md-6">
+                    <div class="card-body ps-4 pb-0">
+                    <h1 class="card-title mt-3 mb-3"><span class="mr-1">
+                            <%= player.lastname %>
+                        </span>
+                        <span>
+                            <%= player.firstname %>
+                        </span>
+                    </h1>
+                    <div class="mx-n1spc mx-md-0">
+                        <table class="table mb-0 border-top">
+                            <colgroup>
+                                <col style="width: 30%">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th class="">生年月日</th>
+                                    <td class="">
+                                        <%= player.birthyear %>/<%= player.birthmonth %>/<%= player.birthday %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="">国籍</th>
+                                    <td class="">
+                                        <%= player.nationality %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="">出身地</th>
+                                    <td class="">
+                                        <%= player.birthplace %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="">活動エリア</th>
+                                    <td class="">
+                                        <%= player.workarea %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="">身長 / 体重</th>
+                                    <td class="">
+                                        <%= player.height %>cm / <%= player.weight %>kg
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="">血液型</th>
+                                    <td class="">
+                                        <%= player.bloodtype %>型
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="">所属チーム</th>
+                                    <td class="">
+                                        <%= player.affiliationteam %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="">ポジション</th>
+                                    <td class="">
+                                        <%= player.position %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="">利き足</th>
+                                    <td class="">
+                                        <%= player.dominantfoot %>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                    <div class="card-body text-center d-flex justify-content-evenly">
+                    <a href="<%= player.snslink.x %>" target="_blank" class="icon-link" id="icon-x">
+                        <i class="fa-brands  fa-square-x-twitter"></i>
+                      </a>
+                      <a href="<%= player.snslink.instagram %>" target="_blank" class="icon-link" id="icon-instagram">
+                        <i class="fa-brands fa-square-instagram"></i>
+                      </a>
+                      <a href="<%= player.snslink.youtube %>" target="_blank" class="icon-link" id="icon-youtube">
+                        <i class="fa-brands fa-square-youtube"></i>
+                      </a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- 下部エリア -->
+    <div class="row mb-4">
+        <div class="col-md-10 offset-md-1">
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapseOne">
+                            選手経歴
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <% player.career.forEach((career, i)=> { %>
+                                <%= i === 0 ? `${career}` : ` - ${career}`;%>
+                                    <% }) %>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapseTwo">
+                            成績・実績
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <ul class="mb-0">
+                                <% for (let record of player.record) { %>
+                                    <li>
+                                        <%= record %>
+                                    </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapseThree">
+                            提供できるリターン
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                        <div class="accordion-body text-pre-wrap"><%= player.returndetail %></div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapsefour" aria-expanded="false" aria-controls="panelsStayOpen-collapsefour">
+                            希望するスポンサー支援
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse">
+                        <div class="accordion-body text-pre-wrap"><%= player.desiredsupport %></div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapsefive">
+                            契約中のスポンサー
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <ul class="mb-0">
+                                <% for (let contractsponsor of player.contractsponsor) { %>
+                                    <li>
+                                        <%= contractsponsor %>
+                                    </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapsesix" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapsesix">
+                            今後の目標
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapsesix" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <div class="mx-n1spc mx-md-0">
+                                <table class="table">
+                                    <colgroup>
+                                        <col style="width: 20%">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <th class="px-lg-1">選手活動</th>
+                                            <td class="text-pre-wrap"><%= player.target.playerwork %></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="px-lg-1">社会活動</th>
+                                            <td class="text-pre-wrap"><%= player.target.socialwork %></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="px-lg-1 border-bottom-0">その他</th>
+                                            <td class="border-bottom-0 text-pre-wrap"><%= player.target.otherwork %></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseseven" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapseseven">
+                            メッセージ
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseseven" class="accordion-collapse collapse">
+                        <div class="accordion-body text-pre-wrap"><%= player.message %></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <% if(currentUser && currentUser.profilecompleted && currentUser.usertype === "sponsor") { %> 
+    <div class="container text-center mb-5">
+    <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        メッセージを送る
+    </button>
+    </div>
+    
+    <!-- モーダル -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">メッセージを送る</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="contactForm" action="/contacts" method="POST" novalidate class="validated-form">
+                        <input type="hidden" name="contact[senderid]" id="senderid" value="<%= currentUser._id %>">
+                        <input type="hidden" name="contact[receiverid]" id="receiverid" value="<%= player.author %>">
+                        <input type="hidden" name="playerid" id="playerid" value="<%= player._id %>">
+                        <div class="mb-3">
+                          <label for="message" class="form-label">メッセージ</label>
+                          <textarea class="form-control" type="text" name="contact[message]" id="message" rows="6" required></textarea>
+                        </div>
+                        <div class="modal-footer border-top-0">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                            <button type="submit" class="btn btn-primary">メッセージを送信</button>
+                        </div>
+                      </form>
+                </div>                  
+            </div>
+        </div>
+    </div>
+    <% } %>

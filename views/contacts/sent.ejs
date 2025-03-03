@@ -1,0 +1,63 @@
+<% layout('layouts/boilerplate') %>
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <h1 class="">送信メッセージリスト</h1>
+        <div class="mb-3 d-grid gap-2 d-flex justify-content-end">
+            <a class="btn btn-secondary btn-sm" href="/<%= currentUser.usertype === "player" ? "sponsor" : "player"
+                %>s"><%= currentUser.usertype==="player" ? "スポンサー" : "プレイヤー" %>リストへ</a>
+        </div>            
+             
+        <% contacts.forEach((contact, i)=> { %>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <div class="d-grid gap-2 d-flex justify-content-between">
+                    状態：<% if(contact.status==='pending' ) { %>承認待ち<% } else if(contact.status==='approved' ) { %>承認済<% } else { %>拒否済
+                    <% } %>
+                    <% if(contact.status==='approved' ) { %>                                                                     
+                        <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deletemodal<%= i %>">削除</button>
+                    <% } %>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">送信相手：<%= contact.receiverid.username %></h5>
+                    <div class="mt-3 mb-3 row d-flex">
+                        <div class="col-auto pe-1">
+                            <div class="card-text">メッセージ：</div>
+                        </div>
+                        <div class="col ps-0">
+                            <p class="card-text"><%= contact.message %></p>
+                        </div>
+                    </div>
+                    <% if(contact.status==='approved' ) { %>
+                    <div class="border-top pt-3">
+                        <h6 class="card-text">連絡先：<%= contact.receiverid.email %></h6>                        
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <!-- 削除モーダル -->
+            <div class="modal fade" id="deletemodal<%= i %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="deletemodal<%= i %>Label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <p><%= contact.receiverid.username %>様へのコンタクトを<strong>削除</strong>します。<br>このコンタクトは完全に削除され、相手にも表示されなくなります。<br>よろしいですか？
+                            </p>
+                            <form action="/contacts/<%= contact._id %>?_method=DELETE" method="POST" novalidate class="validated-form">
+                                <input type="hidden" name="target" id="sent" value="sent">
+                                <div class="modal-footer justify-content-center border-top-0">
+                                    <button type="submit" class="btn btn-primary">OK</button>
+                                    <button type="button" class="btn btn-secondary ms-3" data-bs-dismiss="modal">NO</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>

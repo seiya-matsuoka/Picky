@@ -1,0 +1,38 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Picky</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/">ホーム</a>
+                <a class="nav-link" href="/players">プレイヤーリスト</a>
+                <a class="nav-link" href="/sponsors">スポンサーリスト</a>
+                
+            </div>
+            <div class="navbar-nav ms-auto">
+                <% if(!currentUser) { %> 
+                <!-- ユーザ情報が無い場合 -->
+                <a class="nav-link" href="/login">ログイン</a>
+                <a class="nav-link" href="/register">ユーザー登録</a>
+                <% } else { %>
+                <% if(currentUser && currentUser.profilecompleted) { %>
+                <!-- プロフィール登録済の場合 -->
+                <a class="nav-link" href="/contacts/received/<%= currentUser._id %>">受信リスト</a>
+                <a class="nav-link" href="/contacts/sent/<%= currentUser._id %>">送信リスト</a>
+                <a class="nav-link" href="/<%= currentUser.usertype %>s/<%= currentUser.usertype === "player" ? currentUser.playerid : currentUser.sponsorid %>/edit">プロフィール編集</a>
+                <% } else { %>
+                <!-- プロフィール登録前の場合 -->
+                <a class="nav-link" href="/<%= currentUser.usertype %>s/new">プロフィール登録</a>
+                <% } %>            
+                <a class="nav-link" href="/logout">ログアウト</a>
+                <% } %>
+                <a tabindex="0" class="btn" role="button" data-bs-toggle="popover" data-bs-trigger="click" data-bs-title="info"
+                    data-bs-content="開発中。実在しない人物の情報で自由にユーザー登録して使用してください。メールが送信される機能は実装していませんが、メールアドレスは存在しないアドレスを登録してください。適当なメールアドレス形式の文字列で登録してください（例：example@example.com）。他者に見られたくない画像は登録しないでください。">
+                    <i class="fa-solid fa-circle-info text-light"></i></a>                
+            </div>
+        </div>
+    </div>
+</nav>

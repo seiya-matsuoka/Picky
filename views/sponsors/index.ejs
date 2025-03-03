@@ -1,0 +1,36 @@
+<% layout('layouts/boilerplate') %>
+<h1>スポンサーリスト</h1>
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    <% for(let sponsor of sponsors) { %>
+    <div class="col mb-3">
+        <div class="card h-100">
+            <div class="row g-0">
+                <div class=" col-md-6">
+                    <div class="index-img">
+                    <% if(sponsor.images && sponsor.images.length) {%>
+                        <img class="img-fluid w-100 h-100 object-fit-contain" src="<%= sponsor.images[0].url %>" alt="">
+                    <% } %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body pb-1">
+                        <h2 class="card-title"><%= sponsor.companyname %></h2>
+                    </div>
+                    <ul class="list-group list-group-flush border-top border-bottom">
+                        <li class="list-group-item">住所：<%= sponsor.address %></li>
+                        <li class="list-group-item">設立年：<%= sponsor.foundationyear %></li>
+                        <li class="list-group-item">事業内容：<%= sponsor.businessdetail %></li>
+                    </ul>
+                    <div class="card-body">
+                        <p class="card-text"><%= sponsor.message.length> 50 ? sponsor.message.substring(0, 100) + "..." : sponsor.message %></p>
+                    </div>
+                    <div class="card-body text-center  pt-0">
+                        <a class="btn btn-primary" href="/sponsors/<%= sponsor._id %>"><%= sponsor.companyname %>の詳細</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
+</div>

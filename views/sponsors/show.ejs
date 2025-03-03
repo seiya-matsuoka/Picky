@@ -1,0 +1,229 @@
+<% layout('layouts/boilerplate') %>
+
+    <!-- 上部エリア -->
+    <div class="row  mb-5 profile">
+        <div class="col-md-10 offset-md-1">
+            <div class="card h-100 company-profile-card">
+            <div class="row g-0 h-100">
+                <!-- 写真 -->
+                <div class="col-md-6">
+                    <div id="carouselExampleIndicators" class="carousel slide h-100" data-bs-ride="false"  data-bs-interval="false">
+                        <div class="carousel-indicators">
+                            <% if(sponsor.images.length> 1) { %>
+                                <% sponsor.images.forEach((img, i)=> { %>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= i %>"
+                                        class="<%= i === 0 ? 'active': '' %>" aria-current="true" aria-label="Slide <%= i + 1 %>"></button>
+                                <% }) %>
+                            <% } %>
+                        </div>
+                        <div class="carousel-inner sponsor-profile-img">
+                            <% sponsor.images.forEach((img, i)=> { %>
+                                <div class="carousel-item <%= i === 0 ? 'active': '' %> h-100">
+                                    <img src="<%= img.url %>" class="d-block w-100 h-100 object-fit-contain" alt="">
+                                </div>
+                            <% }) %>
+                        </div>
+                        <% if(sponsor.images.length> 1) { %>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        <% } %>
+                    </div>                
+                </div>
+                <!-- プロフィール -->
+                <div class="col-md-6">
+                    <div class="card-body ps-4 pb-0">
+                    <h1 class="card-title mt-3 mb-3"><span class="mr-1">
+                            <%= sponsor.companyname %>
+                        </span>
+                    </h1>
+                    <div class="mx-n1spc mx-md-0 m">
+                        <table class="table mb-0 border-top">
+                            <colgroup>
+                                <col style="width: 30%">
+                            </colgroup>
+                            <tbody>                                
+                                <tr>
+                                    <th class="">住所</th>
+                                    <td class="">
+                                        <%= sponsor.address %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="">設立年</th>
+                                    <td class="">
+                                        <%= sponsor.foundationyear %>年
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="">事業内容</th>
+                                    <td class="">
+                                        <%= sponsor.businessdetail %>
+                                    </td>
+                                </tr>                                
+                                <tr>
+                                    <th class="">資本金</th>
+                                    <td class="">
+                                        <%= sponsor.capital %>円
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="">従業員数</th>
+                                    <td class="">
+                                        <%= sponsor.employeenumber %>人
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="">ホームページ</th>
+                                    <td class="">
+                                        <%= sponsor.homepage %>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                    <div class="card-body text-center d-flex justify-content-evenly">
+                        <a href="<%= sponsor.snslink.x %>" target="_blank" class="icon-link" id="icon-x">
+                            <i class="fa-brands  fa-square-x-twitter"></i>
+                          </a>
+                          <a href="<%= sponsor.snslink.instagram %>" target="_blank" class="icon-link" id="icon-instagram">
+                            <i class="fa-brands fa-square-instagram"></i>
+                          </a>
+                          <a href="<%= sponsor.snslink.youtube %>" target="_blank" class="icon-link" id="icon-youtube">
+                            <i class="fa-brands fa-square-youtube"></i>
+                          </a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- 下部エリア -->
+    <div class="row mb-4">
+        <div class="col-md-10 offset-md-1">
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapseOne">
+                            会社説明
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
+                        <div class="accordion-body text-pre-wrap"><%= sponsor.companydescription %></div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapseTwo">
+                            求める選手・人物像
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                        <div class="accordion-body text-pre-wrap"><%= sponsor.calculatestatue %></div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapseThree">
+                            提供できるスポンサー支援
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                        <div class="accordion-body text-pre-wrap"><%= sponsor.supportdetail %></div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapsefour" aria-expanded="false" aria-controls="panelsStayOpen-collapsefour">
+                            希望するリターン
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse">
+                        <div class="accordion-body text-pre-wrap"><%= sponsor.desiredreturn %></div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapsefive">
+                            契約中の選手
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <ul class="mb-0">
+                                <% for (let contractplayer of sponsor.contractplayer) { %>
+                                    <li>
+                                        <%= contractplayer %>
+                                    </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapsesix" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapsesix">
+                            メッセージ
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapsesix" class="accordion-collapse collapse">
+                        <div class="accordion-body text-pre-wrap"><%= sponsor.message %></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <% if(currentUser && currentUser.profilecompleted && currentUser.usertype === "player") { %> 
+        <div class="container text-center mb-5">
+        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            メッセージを送る
+        </button>
+        </div>
+        
+        <!-- モーダル -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">メッセージを送る</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="contactForm" action="/contacts" method="POST" novalidate class="validated-form">
+                            <input type="hidden" name="contact[senderid]" id="senderid" value="<%= currentUser._id %>">
+                            <input type="hidden" name="contact[receiverid]" id="receiverid" value="<%= sponsor.author %>">
+                            <input type="hidden" name="sponsorid" id="sponsorid" value="<%= sponsor._id %>">
+                            <div class="mb-3">
+                              <label for="message" class="form-label">メッセージ</label>
+                              <textarea class="form-control" type="text" name="contact[message]" id="message" rows="6" required></textarea>
+                            </div>
+                            <div class="modal-footer border-top-0">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                                <button type="submit" class="btn btn-primary">メッセージを送信</button>
+                            </div>
+                          </form>
+                    </div>                  
+                </div>
+            </div>
+        </div>
+    
+    <% } %>
